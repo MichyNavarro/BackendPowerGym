@@ -1,13 +1,45 @@
-//importamos express
 const express = require('express');
+
+const turnosRoutes = require('./routes/turnos.routes.js');
+const usersRoutes = require('./routes/users.routes.js');
+const clasesRoutes = require('./routes/clases.routes.js');
+const pagosRoutes = require('./routes/pagos.routes.js');
+
+const connectDB = require('./database/db.js');
+const cors = require('cors');
+const cookieParser = require('cookie-parser');
+require('dotenv').config();
+
 const app = express();
-require("dotenv").config();
 
+app.use(cookieParser());
+app.use(
+	cors({
+		origin: [
+			'http://localhost:5173',
+			'https://flourishing-tanuki-55bdc2.netlify.app',
+			'http://localhost:5174',
+			'*',
+		],
+		credentials: true,
+	})
+);
 
-
-//lecutura y parseo del body
 app.use(express.json());
 
-app.listen(process.env.PORT, () => {
-	console.log(`Servidor corriendo en el puerto ${process.env.PORT}`);
-});
+app.use('/api', turnosRoutes);
+app.use('/api', usersRoutes);
+app.use('/api', clasesRoutes);
+app.use('/api', pagosRoutes);
+
+async function main() {
+	try {
+		await connectDB();
+		console.log(`Escuchando en el puerto:`, 4000);
+		app.listen(4000);
+	} catch (error) {
+		console.error(error);
+	}
+}
+
+main();
