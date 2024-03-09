@@ -1,11 +1,11 @@
 const express = require('express');
 
-const turnosRoutes = require('./routes/turnos.routes.js');
-const usersRoutes = require('./routes/users.routes.js');
-const clasesRoutes = require('./routes/clases.routes.js');
-const pagosRoutes = require('./routes/pagos.routes.js');
+const turnosRoutes = require('./src/routes/turnos.routes.js');
+const usersRoutes = require('./src/routes/users.routes.js');
+const clasesRoutes = require('./src/routes/clases.routes.js');
+const pagosRoutes = require('./src/routes/pagos.routes.js');
 
-const connectDB = require('./database/db.js');
+const connectDB = require('./src/database/db.js');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 require('dotenv').config();
