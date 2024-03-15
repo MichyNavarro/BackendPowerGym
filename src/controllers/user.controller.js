@@ -75,9 +75,39 @@ const updateUser = async (req, res) => {
 	}
 };
 
+const createPago = async (req, res) => {
+	const { fechavenc, plan, estado, fechapago } = req.body;
+
+	try {
+		const userId = req.params.id; // Asegúrate de ajustar esto según tu ruta de API
+
+		// Buscar el expediente por ID
+		const user = await User.findById(userId);
+		if (!user) {
+			return res.status(404).json({ message: 'Usuario no encontrado' });
+		}
+		// Crear una nueva instancia del modelo pago utilizando los datos de la solicitud
+		const newPago = {
+			fechavenc,
+			estado,
+			plan,
+			fechapago,
+		};
+		user.pagos.push(newPago);
+
+		// Guardar el pago actualizado en la base de datos
+		const savedPago = await user.save();
+		res.json(savedPago.pagos);
+	} catch (error) {
+		return res.status(500).json({ message: error.message });
+	}
+};
+
+
 module.exports = {
 	getUser,
 	getUsers,
 	createUser,
 	updateUser,
+	createPago
 };

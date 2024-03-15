@@ -5,7 +5,6 @@ const userSchema = new mongoose.Schema(
 		nombre: {
 			type: String,
 			required: true,
-
 		},
 		email: {
 			type: String,
@@ -21,15 +20,32 @@ const userSchema = new mongoose.Schema(
 		},
 		dni: {
 			type: String,
-
 		},
 		domicilio: {
 			type: String,
-
 		},
 		celular: {
 			type: String,
 		},
+		pagos: [
+			{
+				fechavenc: {
+					type: String,
+					require: true,
+				},
+				plan: {
+					type: String,
+					require: true,
+				},
+				estado: {
+					type: String,
+					required: true,
+				},
+				fechapago: {
+					type: String,
+				},
+			},
+		],
 	},
 	{
 		timestamps: true,
