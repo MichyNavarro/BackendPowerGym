@@ -11,7 +11,7 @@ const getClases = async (req, res) => {
 
 const createClase = async (req, res) => {
 	// Extraer los campos del cuerpo de la solicitud (request body)
-	const { fecha, hora, actividad, disponibilidad } = req.body;
+	const { fecha, hora, actividad, sede, disponibilidad } = req.body;
 
 	try {
 		// Crear una nueva instancia del modelo Clase utilizando los datos de la solicitud
@@ -19,6 +19,7 @@ const createClase = async (req, res) => {
 			fecha,
 			hora,
 			actividad,
+			sede,
 			disponibilidad,
 		});
 		const savedClase = await newClase.save();

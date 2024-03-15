@@ -4,7 +4,8 @@ const {
 	getUsers,
 	getUser,
 	updateUser,
-	createUser
+	createUser,
+	createPago,
 } = require('../controllers/user.controller.js');
 
 const router = express.Router();
@@ -12,6 +13,7 @@ const router = express.Router();
 router.get('/users', getUsers);
 router.get('/users/:id', getUser);
 router.put('/users/:id', updateUser);
-router.post('/users',  createUser);
+router.post('/users', createUser);
+router.post('/users/:id/pagos', createPago);
 
 module.exports = router;
