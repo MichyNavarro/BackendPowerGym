@@ -1,8 +1,10 @@
 const Clase = require('../model/clase.model.js');
 
 const getClases = async (req, res) => {
+	console.log("body", req.body)
 	try {
 		const clases = await Clase.find();
+		console.log("clases",clases)
 		res.json(clases);
 	} catch (error) {
 		return res.status(500).json({ message: error.message });

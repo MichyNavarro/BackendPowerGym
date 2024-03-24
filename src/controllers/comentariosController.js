@@ -6,8 +6,6 @@ const getComentarios = async (req, res) => {
 		// Selecciona aleatoriamente 5 comentarios de la lista
 		const comentariosAleatorios = shuffleArray(comentarios).slice(0, 5);
 
-		// Ahora pasas estos comentarios aleatorios a tu vista para mostrarlos en el carrusel
-		// res.render('paginaDelCarrusel', { comentarios: comentariosAleatorios });
 		res.json(comentariosAleatorios);
 	} catch (error) {
 		return res.status(500).json({ message: error.message });
