@@ -4,6 +4,7 @@ const turnosRoutes = require('./src/routes/turnos.routes.js');
 const usersRoutes = require('./src/routes/users.routes.js');
 const clasesRoutes = require('./src/routes/clases.routes.js');
 const pagosRoutes = require('./src/routes/pagos.routes.js');
+const comentariosRoutes = require('./src/routes/comentarios.routes.js');
 
 const connectDB = require('./src/database/db.js');
 const cors = require('cors');
@@ -31,6 +32,7 @@ app.use('/api', turnosRoutes);
 app.use('/api', usersRoutes);
 app.use('/api', clasesRoutes);
 app.use('/api', pagosRoutes);
+app.use('/api', comentariosRoutes);
 
 async function main() {
 	try {
