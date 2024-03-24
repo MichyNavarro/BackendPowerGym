@@ -5,7 +5,8 @@ const {
 	getClases,
 	getClase,
 	deleteClase,
-	updateDisponibilidad
+	updateDisponibilidad,
+	updateClase
 } = require('../controllers/clase.controller.js');
 
 const router = express.Router();
@@ -15,5 +16,6 @@ router.get('/clases/:id',  getClase);
 router.post('/clases',  createClase);
 router.delete('/clases',  deleteClase);
 router.put('/clases/:id',  updateDisponibilidad);
+router.put('/clases/update/:id',  updateClase);
 
 module.exports = router;

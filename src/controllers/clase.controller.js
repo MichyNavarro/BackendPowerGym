@@ -68,10 +68,33 @@ const updateDisponibilidad = async (req, res) => {
 	}
 };
 
+//Michel 
+const updateClase = async (req, res) => {
+	try {
+		let { fecha, hora, actividad, disponibilidad } = req.body;
+		const updateFields = {
+			fecha,
+			hora,
+			actividad,
+			disponibilidad,
+		};
+		const updatedClase = await Clase.findByIdAndUpdate(
+			req.params.id,
+			updateFields,
+			{ new: true }
+		);
+		res.json(updatedClase);
+	} catch (error) {
+		return res.status(500).json({ message: error.message });
+	}
+};
+
+
 module.exports = {
 	getClase,
 	getClases,
 	createClase,
 	deleteClase,
 	updateDisponibilidad,
+	updateClase,
 };
