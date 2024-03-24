@@ -10,9 +10,9 @@ const {
 // validar token
 // const { validarJWT } = require('../middlewares/validar-jwt');
 
-routerAdmin.get('/users', validarJWT, cargarUsuarios);
+routerAdmin.get('/users', cargarUsuarios); //Agregar funcion JWT en medio
 
-routerAdmin.delete('/users/:id', validarJWT, eliminarUsuario);
+routerAdmin.delete('/users/:id', eliminarUsuario); //Agregar funcion JWT en medio
 
 
 module.exports = routerAdmin;
