@@ -1,11 +1,11 @@
 const express = require('express');
-// const { authRequired } = require('../middlewares/validateToken.js');
 const {
-	getUsers,
-	getUser,
-	updateUser,
-	createUser,
-	createPago,
+    getUsers,
+    getUser,
+    updateUser,
+    createUser,
+    loginUser,
+    createPago,
 } = require('../controllers/user.controller.js');
 
 const router = express.Router();
@@ -13,7 +13,8 @@ const router = express.Router();
 router.get('/users', getUsers);
 router.get('/users/:id', getUser);
 router.put('/users/:id', updateUser);
-router.post('/users', createUser);
+router.post('/users/register', createUser);
 router.post('/users/:id/pagos', createPago);
+router.post("/users/login", loginUser);
 
 module.exports = router;
