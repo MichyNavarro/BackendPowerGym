@@ -1,6 +1,7 @@
 const User = require('../model/user.model.js');
 const bcrypt = require('bcryptjs');
 const Jwt = require('jsonwebtoken');
+const createAccessToken = require('../libs/jwt.js');
 // const { TOKEN_SECRET } = require('../app.js');
 
 const createUser = async (req, res) => {
@@ -45,22 +46,23 @@ const createUser = async (req, res) => {
 };
 
 const loginUser = async (req, res) => {
-	const { email, password } = req.body;
+	
 	try {
+		const { email, password } = req.body;
 		// Buscar al usuario por correo electrónico en la base de datos
 		const user = await User.findOne({ email });
 		if (!user) {
-			return res.status(404).json({ message: 'Usuario no encontrado' });
+			return res.status(400).json({ message: 'Usuario no encontrado' });
 		}
 
 		// Comparar la contraseña proporcionada con la contraseña almacenada en la base de datos
 		const isPasswordValid = await bcrypt.compare(password, user.password);
 		if (!isPasswordValid) {
-			return res.status(401).json({ message: 'Credenciales inválidas' });
+			return res.status(401).json({ message: 'La contraseña ingresada es incorrecta' });
 		}
 
 		// Generar un token de autenticación
-		const token = Jwt.sign({ userId: user._id }, process.env.TOKEN_SECRET);
+		const token = await createAccessToken({ id: user._id });
 		res.cookie('accesstoken', token);
 		// Devolver el token al cliente
 		res.json({

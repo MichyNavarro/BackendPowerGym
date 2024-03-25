@@ -21,7 +21,6 @@ function shuffleArray(array) {
 }
 
 const createComentario = async (req, res) => {
-   console.log(req.body)
 	const { nombre, comentario } = req.body;
 
 	try {

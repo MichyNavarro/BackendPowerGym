@@ -1,10 +1,8 @@
 const Clase = require('../model/clase.model.js');
 
 const getClases = async (req, res) => {
-	console.log("body", req.body)
 	try {
 		const clases = await Clase.find();
-		console.log("clases",clases)
 		res.json(clases);
 	} catch (error) {
 		return res.status(500).json({ message: error.message });
@@ -14,7 +12,6 @@ const getClases = async (req, res) => {
 const createClase = async (req, res) => {
 	// Extraer los campos del cuerpo de la solicitud (request body)
 	const { fecha, hora, actividad, sede, disponibilidad } = req.body;
-
 	try {
 		// Crear una nueva instancia del modelo Clase utilizando los datos de la solicitud
 		const newClase = new Clase({
@@ -71,7 +68,7 @@ const updateDisponibilidad = async (req, res) => {
 	}
 };
 
-//Michel 
+//Michel
 const updateClase = async (req, res) => {
 	try {
 		let { fecha, hora, actividad, disponibilidad } = req.body;
@@ -91,7 +88,6 @@ const updateClase = async (req, res) => {
 		return res.status(500).json({ message: error.message });
 	}
 };
-
 
 module.exports = {
 	getClase,

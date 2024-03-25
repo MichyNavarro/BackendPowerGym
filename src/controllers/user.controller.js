@@ -1,4 +1,3 @@
-const axios = require('axios');
 const User = require('../model/user.model.js');
 
 const getUsers = async (req, res) => {
@@ -75,7 +74,6 @@ const createPago = async (req, res) => {
 		return res.status(500).json({ message: error.message });
 	}
 };
-
 
 module.exports = {
 	getUser,
