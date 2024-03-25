@@ -1,5 +1,4 @@
 const express = require('express');
-const { authRequired } = require('../middlewares/validateToken.js');
 
 const {
 	createUser,

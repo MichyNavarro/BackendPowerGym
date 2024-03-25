@@ -3,8 +3,6 @@ const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const connectDB = require('./src/database/db.js');
-// const registerRoutes = require("./src/routes/users.routes.js");
-// const loginRoutes = require('./src/routes/users.routes.js');
 const authRoutes = require('./src/routes/auth.routes.js');
 const turnosRoutes = require('./src/routes/turnos.routes.js');
 const usersRoutes = require('./src/routes/users.routes.js');
@@ -24,9 +22,6 @@ app.use(cors({
 app.use(cookieParser());
 app.use(express.json());
 
-// Utiliza las rutas de registro y login
-// app.use('/api', registerRoutes);
-// app.use('/api', loginRoutes);
 app.use('/api', authRoutes);
 app.use('/api', turnosRoutes);
 app.use('/api', usersRoutes);
