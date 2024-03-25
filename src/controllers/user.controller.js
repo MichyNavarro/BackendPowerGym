@@ -74,10 +74,22 @@ const createPago = async (req, res) => {
 		return res.status(500).json({ message: error.message });
 	}
 };
+const deleteUser = async (req, res) => {
+	try {
+		const deletedUser = await User.findByIdAndDelete(req.params.id);
+		if (!deletedUser)
+			return res.status(404).json({ message: 'Usuario no encontrado' });
+
+		res.json(deletedUser);
+	} catch (error) {
+		return res.status(500).json({ message: error.message });
+	}
+};
 
 module.exports = {
 	getUser,
 	getUsers,
 	updateUser,
+	deleteUser,
 	createPago,
 };
