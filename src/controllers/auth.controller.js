@@ -32,10 +32,14 @@ const createUser = async (req, res) => {
 		});
 		const savedUser = await newUser.save();
 
-		// envia respuesta del registro al frontend
-		res.status(201).json({
-			message: 'Usuario registrado correctamente',
-			user: savedUser,
+		const token = await createAccessToken({ id: savedUser._id });
+		res.cookie('accesstoken', token);
+
+		res.json({
+			id: savedUser._id,
+			email: savedUser.email,
+			displayName: `${savedUser.nombre} ${savedUser.apellido}`,
+			token: token,
 		});
 	} catch (error) {
 		res.status(500).json({
@@ -46,7 +50,6 @@ const createUser = async (req, res) => {
 };
 
 const loginUser = async (req, res) => {
-	
 	try {
 		const { email, password } = req.body;
 		// Buscar al usuario por correo electrónico en la base de datos
@@ -58,12 +61,15 @@ const loginUser = async (req, res) => {
 		// Comparar la contraseña proporcionada con la contraseña almacenada en la base de datos
 		const isPasswordValid = await bcrypt.compare(password, user.password);
 		if (!isPasswordValid) {
-			return res.status(401).json({ message: 'La contraseña ingresada es incorrecta' });
+			return res
+				.status(401)
+				.json({ message: 'La contraseña ingresada es incorrecta' });
 		}
 
 		// Generar un token de autenticación
 		const token = await createAccessToken({ id: user._id });
 		res.cookie('accesstoken', token);
+
 		// Devolver el token al cliente
 		res.json({
 			id: user._id,
