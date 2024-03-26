@@ -2,14 +2,12 @@ const User = require('../model/user.model.js');
 const bcrypt = require('bcryptjs');
 const Jwt = require('jsonwebtoken');
 const createAccessToken = require('../libs/jwt.js');
-// const { TOKEN_SECRET } = require('../app.js');
 
 const createUser = async (req, res) => {
-	// Extraer los campos del cuerpo de la solicitud (request body)
 	const { nombre, apellido, email, dni, domicilio, celular, password } =
 		req.body;
 	try {
-		const saltRounds = 10; // Definir el número de salt rounds
+		const saltRounds = 10;
 		const hashedPassword = await bcrypt.hash(password, saltRounds);
 		// Verificar si ya existe un usuario con el mismo correo electrónico
 		const existingUser = await User.findOne({ email: email });
@@ -17,9 +15,9 @@ const createUser = async (req, res) => {
 			// Si ya existe un usuario con ese correo electrónico, devuelve un mensaje de error
 			return res
 				.status(400)
-				.json({ message: 'El correo electrónico ya está en uso' });
+				.json({ message: 'El correo electrónico ya está registrado' });
 		}
-
+		const displayName= `${nombre} ${apellido}`
 		// Si no existe ningún usuario con ese correo electrónico, procede a guardar el nuevo usuario
 		const newUser = new User({
 			nombre,
@@ -29,6 +27,7 @@ const createUser = async (req, res) => {
 			domicilio,
 			celular,
 			password: hashedPassword,
+			displayName: displayName,
 		});
 		const savedUser = await newUser.save();
 
@@ -38,7 +37,7 @@ const createUser = async (req, res) => {
 		res.json({
 			id: savedUser._id,
 			email: savedUser.email,
-			displayName: `${savedUser.nombre} ${savedUser.apellido}`,
+			displayName: savedUser.displayName,
 			token: token,
 		});
 	} catch (error) {

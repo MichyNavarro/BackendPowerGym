@@ -22,6 +22,7 @@ const updateUser = async (req, res) => {
 	try {
 		const { nombre, apellido, email, dni, domicilio, celular, password } =
 			req.body;
+		const displayName = `${nombre} ${apellido}`;
 		const updateFields = {
 			nombre,
 			apellido,
@@ -29,6 +30,7 @@ const updateUser = async (req, res) => {
 			dni,
 			domicilio,
 			celular,
+			displayName: displayName,
 		};
 		// Verificar si el campo password está presente en la solicitud
 		if (password) {

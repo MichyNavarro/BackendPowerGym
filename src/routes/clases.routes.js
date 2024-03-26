@@ -14,7 +14,7 @@ const router = express.Router();
 router.get('/clases', authRequired,  getClases);
 router.get('/clases/:id', authRequired,  getClase);
 router.post('/clases', authRequired, createClase);
-router.delete('/clases', authRequired,  deleteClase);
+router.delete('/clases/:id', authRequired,  deleteClase);
 router.put('/clases/:id', authRequired,  updateDisponibilidad);
 router.put('/clases/update/:id', authRequired, updateClase);
 

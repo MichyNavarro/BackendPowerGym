@@ -24,7 +24,7 @@ const userSchema = new mongoose.Schema(
 		domicilio: {
 			type: String,
 		},
-		celular: {
+		displayName: {
 			type: String,
 		},
 		pagos: [
