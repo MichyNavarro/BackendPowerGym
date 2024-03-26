@@ -17,8 +17,6 @@ const cargarUsuarios = async (req, res) => {
 	}
 };
 
-
-
 const eliminarUsuario = async (req, res) => {
 	try {
 		const usuarioEliminar = await Usuario.findById(req.params.id);
@@ -46,6 +44,6 @@ const eliminarUsuario = async (req, res) => {
 };
 
 module.exports = {
-    cargarUsuarios, 
-    eliminarUsuario
+	cargarUsuarios,
+	eliminarUsuario,
 };

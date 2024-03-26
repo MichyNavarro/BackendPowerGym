@@ -12,7 +12,6 @@ const getClases = async (req, res) => {
 const createClase = async (req, res) => {
 	// Extraer los campos del cuerpo de la solicitud (request body)
 	const { fecha, hora, actividad, sede, disponibilidad } = req.body;
-
 	try {
 		// Crear una nueva instancia del modelo Clase utilizando los datos de la solicitud
 		const newClase = new Clase({
@@ -33,7 +32,6 @@ const createClase = async (req, res) => {
 const getClase = async (req, res) => {
 	try {
 		const claseSeleccionada = await Clase.findById(req.params.id);
-		if (!res) return res.status(404).json({ message: 'Clase no encontrado' });
 		res.json(claseSeleccionada);
 	} catch (error) {
 		return res.status(500).json({ message: error.message });
@@ -43,9 +41,6 @@ const getClase = async (req, res) => {
 const deleteClase = async (req, res) => {
 	try {
 		const deletedClase = await Clase.findByIdAndDelete(req.params.id);
-		if (!deletedClase)
-			return res.status(404).json({ message: 'Clase no encontrado' });
-
 		res.json(deletedClase);
 	} catch (error) {
 		return res.status(500).json({ message: error.message });
@@ -69,10 +64,33 @@ const updateDisponibilidad = async (req, res) => {
 	}
 };
 
+//Michel
+const updateClase = async (req, res) => {
+	try {
+		let { fecha, hora, actividad, sede, disponibilidad } = req.body;
+		const updateFields = {
+			fecha,
+			hora,
+			actividad,
+			disponibilidad,
+			sede,
+		};
+		const updatedClase = await Clase.findByIdAndUpdate(
+			req.params.id,
+			updateFields,
+			{ new: true }
+		);
+		res.json(updatedClase);
+	} catch (error) {
+		return res.status(500).json({ message: error.message });
+	}
+};
+
 module.exports = {
 	getClase,
 	getClases,
 	createClase,
 	deleteClase,
 	updateDisponibilidad,
+	updateClase,
 };
