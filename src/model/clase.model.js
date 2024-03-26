@@ -16,7 +16,10 @@ const claseSchema = new mongoose.Schema(
 		},
 		disponibilidad: {
 			type: Number,
-						require: true,
+			require: true,
+		},
+		sede: {
+			type: String,
 		},
 	},
 	{
