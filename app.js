@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const connectDB = require('./src/database/db.js');
+
 const authRoutes = require('./src/routes/auth.routes.js');
 const turnosRoutes = require('./src/routes/turnos.routes.js');
 const usersRoutes = require('./src/routes/users.routes.js');
@@ -13,12 +14,7 @@ require('dotenv').config();
 const app = express();
 const port = process.env.PORT || 4000;
 
-app.use(
-	cors({
-		origin: 'http://localhost:5173, , https://backendpowergym.onrender.com',
-		credentials: true,
-	})
-);
+app.use(cors());
 
 app.use(cookieParser());
 app.use(express.json());
