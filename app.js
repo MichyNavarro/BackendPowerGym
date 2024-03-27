@@ -17,8 +17,9 @@ const port = process.env.PORT || 4000;
 app.use(
 	cors({
 		origin: [
+			'*',
 			'http://localhost:5173',
-			'https://powergymtuc.netlify.app/',
+			'https://powergymtuc.netlify.app',
 			'https://backendpowergym.onrender.com',
 			'https://backendpowergym-1thf.onrender.com',
 		],
