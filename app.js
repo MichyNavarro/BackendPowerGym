@@ -1,4 +1,3 @@
-
 const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
@@ -14,10 +13,12 @@ require('dotenv').config();
 const app = express();
 const port = process.env.PORT || 4000;
 
-app.use(cors({
-    origin: 'http://localhost:5173',
-    credentials: true 
-  }));
+app.use(
+	cors({
+		origin: 'http://localhost:5173',
+		credentials: true,
+	})
+);
 
 app.use(cookieParser());
 app.use(express.json());
@@ -29,14 +30,14 @@ app.use('/api', clasesRoutes);
 app.use('/api', comentariosRoutes);
 
 async function main() {
-    try {
-        await connectDB();
-        app.listen(port, () => {
-            console.log(`Servidor corriendo en http://localhost:${port}`);
-        });
-    } catch (error) {
-        console.error(error);
-    }
+	try {
+		await connectDB();
+		app.listen(port, () => {
+			console.log(`Servidor corriendo en http://localhost:${port}`);
+		});
+	} catch (error) {
+		console.error(error);
+	}
 }
 
 main();

@@ -31,8 +31,17 @@ const createUser = async (req, res) => {
 		});
 		const savedUser = await newUser.save();
 
-		const token = await createAccessToken({ id: savedUser._id });
-		res.cookie('accesstoken', token);
+		const payload = {
+			id: savedUser._id,
+			nombre: savedUser.nombre,
+			apellido: savedUser.apellido,
+			email: savedUser.email,
+		};
+
+		const token = Jwt.sign(payload, process.env.TOKEN_SECRET, {
+			expiresIn: '1d',
+		});
+		console.log(token)
 
 		res.json({
 			id: savedUser._id,
@@ -66,8 +75,16 @@ const loginUser = async (req, res) => {
 		}
 
 		// Generar un token de autenticación
-		const token = await createAccessToken({ id: user._id });
-		res.cookie('accesstoken', token);
+				const payload = {
+			id: user._id,
+			nombre: user.nombre,
+			apellido: user.apellido,
+			email: user.email,
+		};
+
+		const token = Jwt.sign(payload, process.env.TOKEN_SECRET, {
+			expiresIn: '1d',
+		});
 
 		// Devolver el token al cliente
 		res.json({
