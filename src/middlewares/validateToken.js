@@ -1,17 +1,17 @@
-const jwt = require ('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 
 const authRequired = (req, res, next) => {
+	const token = req.header('x-token');
+	console.log('cookies token', token);
+
+	if (!token)
+		return res
+			.status(401)
+			.json(['No hay token, autorizacion de acceso denegada']);
 	try {
-		
-		const  token = req.header('x-token');
-		console.log("cookies token", token)
-
-		if (!token)
-			return res.status(401).json(['No token, authorization denied']);
-
 		jwt.verify(token, process.env.TOKEN_SECRET, (error, user) => {
 			if (error) {
-				return res.status(401).json(['Token is not valid']);
+				return res.status(401).json(['El token no es valido.']);
 			}
 			req.user = user;
 			next();
@@ -22,5 +22,5 @@ const authRequired = (req, res, next) => {
 };
 
 module.exports = {
-authRequired
+	authRequired,
 };

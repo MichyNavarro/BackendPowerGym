@@ -43,7 +43,7 @@ const createUser = async (req, res) => {
 		});
 		console.log(token)
 
-		res.json({
+		res.status(201).json({
 			id: savedUser._id,
 			email: savedUser.email,
 			displayName: savedUser.displayName,
@@ -85,9 +85,9 @@ const loginUser = async (req, res) => {
 		const token = Jwt.sign(payload, process.env.TOKEN_SECRET, {
 			expiresIn: '1d',
 		});
-
+		console.log(token)
 		// Devolver el token al cliente
-		res.json({
+		res.status(200).json({
 			id: user._id,
 			email: user.email,
 			displayName: `${user.nombre} ${user.apellido}`,
