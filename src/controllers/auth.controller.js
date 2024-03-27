@@ -109,7 +109,7 @@ const logout = (req, res) => {
 
 const verifyToken = async (req, res) => {
 	const token = req.cookies.token;
-	console.log(token);
+	console.log("cookiestoken",token);
 	if (!token) return res.send(false);
 
 	Jwt.verify(token, process.env.TOKEN_SECRET, async (error, user) => {
