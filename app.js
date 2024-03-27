@@ -15,7 +15,7 @@ const port = process.env.PORT || 4000;
 
 app.use(
 	cors({
-		origin: 'http://localhost:5173',
+		origin: 'http://localhost:5173, , https://backendpowergym.onrender.com',
 		credentials: true,
 	})
 );
